@@ -9,8 +9,8 @@
   <body class="study-page" data-page="study">
     <header class="topbar">
       <div>
-        <span class="brand-badge">Tutor</span>
-        <h1>Comunicación y Lenguaje</h1>
+        <span class="brand-badge">Estudio</span>
+        <h1>Zona de estudio</h1>
       </div>
       <div class="topbar-actions">
         <button id="exportProgressBtn" class="secondary-button">Exportar progreso</button>
@@ -19,6 +19,11 @@
         <button id="logoutBtn" class="ghost-button">Cerrar sesión</button>
       </div>
     </header>
+
+    <nav class="module-tabs" aria-label="Apartados de estudio">
+      <button type="button" class="module-tab active" data-module-target="languageModule">Comunicación y Lenguaje</button>
+      <button type="button" class="module-tab" data-module-target="literatureModule">Literatura: Rebelión en la granja</button>
+    </nav>
 
     <main class="study-layout">
       <aside class="sidebar card">
@@ -42,7 +47,7 @@
         <ul id="weakTopics" class="topic-list"></ul>
       </aside>
 
-      <section class="main-panel">
+      <section class="main-panel" id="languageModule">
         <div class="card welcome-card">
           <p class="eyebrow">Parte 1. Repaso breve</p>
           <h2>Agenda del día</h2>
@@ -78,8 +83,23 @@
           <div id="closingContent"></div>
         </div>
       </section>
+
+      <section class="main-panel hidden" id="literatureModule">
+        <div class="card">
+          <p class="eyebrow">Literatura · Capítulos 1–5</p>
+          <h2>Rebelión en la granja</h2>
+          <p>Quiz de comprensión con preguntas variadas. Las respuestas no aparecen hasta que termines.</p>
+          <button type="button" class="primary-button" id="startAnimalFarmQuiz">Empezar quiz</button>
+        </div>
+        <div class="card hidden" id="animalFarmQuizCard">
+          <p id="animalFarmStatus" class="feedback" aria-live="polite"></p>
+          <div id="animalFarmQuiz" class="quiz-container"></div>
+          <div id="animalFarmResults" class="hidden"></div>
+        </div>
+      </section>
     </main>
 
     <script src="app.js"></script>
+    <script src="rebelion.js"></script>
   </body>
 </html>

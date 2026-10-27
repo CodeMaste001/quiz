@@ -28,3 +28,5 @@
 ## Nota
 
 El proyecto usa un historial local del navegador para exportar/importar progreso y ofrece un entorno privado sin autenticación por base de datos.
+
+La página de estudio incluye apartados separados para Comunicación y Lenguaje y un quiz variable de *Rebelión en la granja* (capítulos 1–5). Las preguntas y el orden de las opciones cambian entre sesiones; las respuestas se muestran después de terminar.

@@ -190,6 +190,28 @@ input[type="text"], input[type="password"] {
   flex-wrap: wrap;
 }
 
+.module-tabs {
+  display: flex;
+  gap: 10px;
+  padding: 18px 32px 0;
+  flex-wrap: wrap;
+}
+
+.module-tab {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--muted);
+  padding: 0.7rem 1rem;
+  font-weight: 700;
+}
+
+.module-tab.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
 .study-layout {
   display: grid;
   grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
@@ -282,6 +304,11 @@ input[type="text"], input[type="password"] {
   line-height: 1.5;
 }
 
+.question-instruction {
+  color: var(--muted);
+  margin: -4px 0 14px;
+}
+
 .option-list {
   display: grid;
   gap: 10px;
@@ -326,6 +353,28 @@ input[type="text"], input[type="password"] {
   border-radius: 10px;
   background: #fff8ed;
   color: #7a4b00;
+}
+
+.quiz-results {
+  display: grid;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.quiz-result-item {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.quiz-result-item.correct {
+  border-color: rgba(29, 143, 95, 0.42);
+  background: var(--correct-soft);
+}
+
+.quiz-result-item.incorrect {
+  border-color: rgba(198, 77, 77, 0.38);
+  background: var(--wrong-soft);
 }
 
 .quiz-actions {
@@ -404,7 +453,8 @@ input[type="text"], input[type="password"] {
 
 @media (max-width: 860px) {
   .topbar,
-  .study-layout {
+  .study-layout,
+  .module-tabs {
     padding-left: 16px;
     padding-right: 16px;
   }
