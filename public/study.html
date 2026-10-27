@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estudio personal</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="study-page" data-page="study">
+    <header class="topbar">
+      <div>
+        <span class="brand-badge">Tutor</span>
+        <h1>Comunicación y Lenguaje</h1>
+      </div>
+      <div class="topbar-actions">
+        <button id="exportProgressBtn" class="secondary-button">Exportar progreso</button>
+        <button id="importProgressBtn" class="secondary-button">Importar progreso</button>
+        <input id="importProgressInput" type="file" accept="application/json" hidden />
+        <button id="logoutBtn" class="ghost-button">Cerrar sesión</button>
+      </div>
+    </header>
+
+    <main class="study-layout">
+      <aside class="sidebar card">
+        <h2>Resumen</h2>
+        <div id="progressSummary" class="summary-list">
+          <div class="summary-item">
+            <span>Sesiones</span>
+            <strong id="sessionsCount">0</strong>
+          </div>
+          <div class="summary-item">
+            <span>Preguntas</span>
+            <strong id="questionsCount">0</strong>
+          </div>
+          <div class="summary-item">
+            <span>Fallas</span>
+            <strong id="mistakesCount">0</strong>
+          </div>
+        </div>
+
+        <h3>Temas a reforzar</h3>
+        <ul id="weakTopics" class="topic-list"></ul>
+      </aside>
+
+      <section class="main-panel">
+        <div class="card welcome-card">
+          <p class="eyebrow">Parte 1. Repaso breve</p>
+          <h2>Agenda del día</h2>
+          <div id="reviewSummary"></div>
+        </div>
+
+        <div class="card quiz-panel">
+          <div id="quizIntro" class="quiz-intro">
+            <p class="eyebrow">Parte 2. Quiz</p>
+            <h2>Quiz diario</h2>
+            <p>Hoy trabajaremos con diez preguntas variadas para repasar prototipos textuales y funciones del lenguaje.</p>
+            <button id="startQuizBtn" class="primary-button">Comenzar a estudiar</button>
+          </div>
+
+          <div id="quizContainer" class="quiz-container hidden"></div>
+        </div>
+
+        <div id="correctionSection" class="card hidden">
+          <p class="eyebrow">Parte 3. Corrección</p>
+          <h2>Retroalimentación</h2>
+          <div id="correctionContent"></div>
+        </div>
+
+        <div id="flashcardSection" class="card hidden">
+          <p class="eyebrow">Parte 4. Refuerzo</p>
+          <h2>Tarjetas de memoria</h2>
+          <div id="flashcards" class="flashcards"></div>
+        </div>
+
+        <div id="closingSection" class="card hidden">
+          <p class="eyebrow">Parte 5. Cierre</p>
+          <h2>Resumen final</h2>
+          <div id="closingContent"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

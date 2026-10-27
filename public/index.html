@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acceso privado</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="auth-page" data-page="login">
+    <main class="auth-shell">
+      <section class="auth-card">
+        <div class="brand-block">
+          <span class="brand-badge">Tutor</span>
+          <h1>Estudio privado</h1>
+          <p>Plataforma de aprendizaje con tutor personalizado.</p>
+        </div>
+
+        <form id="loginForm" class="login-form" novalidate>
+          <label>
+            <span>Usuario</span>
+            <input id="username" name="username" type="text" autocomplete="username" placeholder="Usuario" required />
+          </label>
+
+          <label>
+            <span>Contraseña</span>
+            <div class="password-wrap">
+              <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Contraseña" required />
+              <button type="button" class="toggle-password" id="togglePassword" aria-label="Mostrar u ocultar contraseña">Mostrar</button>
+            </div>
+          </label>
+
+          <button type="submit" class="primary-button" id="loginButton">Iniciar sesión</button>
+          <p id="feedback" class="feedback" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
