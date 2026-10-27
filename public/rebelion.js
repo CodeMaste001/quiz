@@ -406,6 +406,31 @@ function renderAnimalFarmQuiz() {
   quizContainer.appendChild(actions);
 }
 
+function renderAnimalFarmProgress() {
+  const summary = document.getElementById('animalFarmProgressSummary');
+  if (!summary) return;
+
+  const progress = JSON.parse(localStorage.getItem(animalFarmProgressKey) || '{"sessions":[]}');
+  const sessions = Array.isArray(progress.sessions) ? progress.sessions : [];
+  if (!sessions.length) {
+    summary.innerHTML = '<p>Aún no hay resultados guardados.</p>';
+    return;
+  }
+
+  summary.innerHTML = `
+    <p><strong>Quizzes completados:</strong> ${sessions.length}</p>
+    <div class="quiz-results">
+      ${sessions.slice(-5).reverse().map((session) => `
+        <article class="quiz-result-item">
+          <strong>${session.score}/10</strong>
+          <span> · ${new Date(session.date).toLocaleString('es')}</span>
+          <p>${session.correct} correctas · ${session.incorrect} incorrectas</p>
+        </article>
+      `).join('')}
+    </div>
+  `;
+}
+
 function submitAnimalFarmQuiz() {
   const unanswered = [...document.querySelectorAll('#animalFarmQuiz .question-card')]
     .some((card) => card.querySelectorAll('.option-button.selected').length === 0);
@@ -437,6 +462,25 @@ function submitAnimalFarmQuiz() {
     button.disabled = true;
   });
   document.querySelector('#animalFarmQuiz .quiz-actions').remove();
+
+  const progress = JSON.parse(localStorage.getItem(animalFarmProgressKey) || '{"sessions":[]}');
+  const sessions = Array.isArray(progress.sessions) ? progress.sessions : [];
+  sessions.push({
+    date: new Date().toISOString(),
+    score,
+    correct: score,
+    incorrect: 10 - score,
+    answers: review.map(({ question, correct, chosenText, correctText }) => ({
+      questionId: question.id,
+      prompt: question.prompt,
+      topic: question.topic,
+      selected: chosenText,
+      correctAnswers: correctText,
+      correct,
+    })),
+  });
+  localStorage.setItem(animalFarmProgressKey, JSON.stringify({ sessions: sessions.slice(-50) }));
+  renderAnimalFarmProgress();
 
   const results = document.getElementById('animalFarmResults');
   results.classList.remove('hidden');
@@ -470,3 +514,4 @@ document.querySelectorAll('.module-tab').forEach((button) => {
 });
 
 document.getElementById('startAnimalFarmQuiz').addEventListener('click', createAnimalFarmQuiz);
+renderAnimalFarmProgress();

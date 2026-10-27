@@ -24,9 +24,11 @@
 - La contraseña no se guarda en localStorage ni en el navegador.
 - Las credenciales privadas viven en `.env`, que debe mantenerse fuera del control de versiones.
 - La plataforma no usa una base de datos ni perfiles múltiples.
+- GitHub Pages es una demo estática pública: no ejecuta el backend y no ofrece inicio de sesión privado.
+- En Pages, los resultados y el progreso se guardan en localStorage del navegador y se pueden exportar/importar; no se sincronizan entre dispositivos.
 
 ## Nota
 
 El proyecto usa un historial local del navegador para exportar/importar progreso y ofrece un entorno privado sin autenticación por base de datos.
 
-La página de estudio incluye apartados separados para Comunicación y Lenguaje y un quiz variable de *Rebelión en la granja* (capítulos 1–5). Las preguntas y el orden de las opciones cambian entre sesiones; las respuestas se muestran después de terminar.
+La página de estudio incluye apartados separados para Comunicación y Lenguaje y un quiz variable de *Rebelión en la granja* (capítulos 1–5). Las preguntas y el orden de las opciones cambian entre sesiones; las respuestas se muestran después de terminar. En Pages, abre la URL del repositorio y se redirige a la zona de estudio.

@@ -20,6 +20,10 @@
       </div>
     </header>
 
+    <p id="staticDemoNotice" class="demo-notice hidden">
+      Demo pública: tu progreso se guarda solo en este navegador. No requiere cuenta y no es una sesión privada.
+    </p>
+
     <nav class="module-tabs" aria-label="Apartados de estudio">
       <button type="button" class="module-tab active" data-module-target="languageModule">Comunicación y Lenguaje</button>
       <button type="button" class="module-tab" data-module-target="literatureModule">Literatura: Rebelión en la granja</button>
@@ -90,6 +94,10 @@
           <h2>Rebelión en la granja</h2>
           <p>Quiz de comprensión con preguntas variadas. Las respuestas no aparecen hasta que termines.</p>
           <button type="button" class="primary-button" id="startAnimalFarmQuiz">Empezar quiz</button>
+        </div>
+        <div class="card">
+          <h2>Resultados guardados</h2>
+          <div id="animalFarmProgressSummary"></div>
         </div>
         <div class="card hidden" id="animalFarmQuizCard">
           <p id="animalFarmStatus" class="feedback" aria-live="polite"></p>

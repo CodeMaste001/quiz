@@ -1,7 +1,8 @@
 const page = document.body.dataset.page;
+const isStaticDemo = new URLSearchParams(window.location.search).get('demo') === '1';
 
 const progressKey = 'privateStudyProgress';
-const sessionHistoryKey = 'privateStudySessionHistory';
+const animalFarmProgressKey = 'animalFarmProgress';
 
 const defaultProgress = {
   sessions: 0,
@@ -678,12 +679,17 @@ function initStudyPage() {
   });
 
   document.getElementById('logoutBtn').addEventListener('click', async () => {
+    if (isStaticDemo) return;
     await fetch('/api/logout', { method: 'POST' });
     window.location.href = '/';
   });
 
   document.getElementById('exportProgressBtn').addEventListener('click', () => {
-    const data = JSON.stringify(getStoredProgress(), null, 2);
+    const data = JSON.stringify({
+      version: 2,
+      studyProgress: getStoredProgress(),
+      animalFarmProgress: JSON.parse(localStorage.getItem(animalFarmProgressKey) || '{"sessions":[]}'),
+    }, null, 2);
     const blob = new Blob([data], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -704,10 +710,19 @@ function initStudyPage() {
     reader.onload = () => {
       try {
         const parsed = JSON.parse(reader.result);
-        const nextProgress = { ...defaultProgress, ...parsed, history: Array.isArray(parsed.history) ? parsed.history : [] };
+        const studyProgress = parsed.studyProgress || parsed;
+        const nextProgress = {
+          ...defaultProgress,
+          ...studyProgress,
+          history: Array.isArray(studyProgress.history) ? studyProgress.history : [],
+        };
         saveProgress(nextProgress);
+        if (parsed.animalFarmProgress && Array.isArray(parsed.animalFarmProgress.sessions)) {
+          localStorage.setItem(animalFarmProgressKey, JSON.stringify(parsed.animalFarmProgress));
+        }
         updateProgressSummary();
         buildReviewSummary();
+        if (typeof renderAnimalFarmProgress === 'function') renderAnimalFarmProgress();
       } catch (error) {
         alert('El archivo de progreso no es válido.');
       }
@@ -722,11 +737,15 @@ if (page === 'login') {
 }
 
 if (page === 'study') {
+  if (isStaticDemo) {
+    document.getElementById('staticDemoNotice').classList.remove('hidden');
+    document.getElementById('logoutBtn').classList.add('hidden');
+  }
   initStudyPage();
 }
 
 window.addEventListener('load', async () => {
-  if (page === 'study') {
+  if (page === 'study' && !isStaticDemo) {
     try {
       const response = await fetch('/api/session');
       const data = await response.json();
